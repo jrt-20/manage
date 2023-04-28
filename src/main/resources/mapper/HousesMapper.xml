@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.manage.mapper.HousesMapper">
+  <resultMap id="BaseResultMap" type="com.family.manage.entity.Houses">
+    <id column="hid" jdbcType="INTEGER" property="hid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="htype" jdbcType="VARCHAR" property="htype" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="xiaoqu" jdbcType="VARCHAR" property="xiaoqu" />
+    <result column="hlou" jdbcType="VARCHAR" property="hlou" />
+    <result column="hfloor" jdbcType="VARCHAR" property="hfloor" />
+    <result column="hsize" jdbcType="DOUBLE" property="hsize" />
+    <result column="publicsize" jdbcType="DOUBLE" property="publicsize" />
+    <result column="hetong" jdbcType="VARCHAR" property="hetong" />
+    <result column="zhengming" jdbcType="VARCHAR" property="zhengming" />
+    <result column="bugtime" jdbcType="DATE" property="bugtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    hid, `uid`, htype, city, area, xiaoqu, hlou, hfloor, hsize, publicsize, hetong, zhengming, 
+    bugtime
+  </sql>
+  <select id="selectByExample" parameterType="com.family.manage.entity.HousesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from houses
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from houses
+    where hid = #{hid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUid" resultType="com.family.manage.entity.Houses">
+    select * from houses where uid = #{uid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from houses
+    where hid = #{hid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.family.manage.entity.HousesExample">
+    delete from houses
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.family.manage.entity.Houses">
+    insert into houses (hid, `uid`, htype, 
+      city, area, xiaoqu, 
+      hlou, hfloor, hsize, 
+      publicsize, hetong, zhengming, 
+      bugtime)
+    values (#{hid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{htype,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{xiaoqu,jdbcType=VARCHAR}, 
+      #{hlou,jdbcType=VARCHAR}, #{hfloor,jdbcType=VARCHAR}, #{hsize,jdbcType=DOUBLE}, 
+      #{publicsize,jdbcType=DOUBLE}, #{hetong,jdbcType=VARCHAR}, #{zhengming,jdbcType=VARCHAR}, 
+      #{bugtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.family.manage.entity.Houses">
+    insert into houses
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        hid,
+      </if>
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="htype != null">
+        htype,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="xiaoqu != null">
+        xiaoqu,
+      </if>
+      <if test="hlou != null">
+        hlou,
+      </if>
+      <if test="hfloor != null">
+        hfloor,
+      </if>
+      <if test="hsize != null">
+        hsize,
+      </if>
+      <if test="publicsize != null">
+        publicsize,
+      </if>
+      <if test="hetong != null">
+        hetong,
+      </if>
+      <if test="zhengming != null">
+        zhengming,
+      </if>
+      <if test="bugtime != null">
+        bugtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="htype != null">
+        #{htype,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoqu != null">
+        #{xiaoqu,jdbcType=VARCHAR},
+      </if>
+      <if test="hlou != null">
+        #{hlou,jdbcType=VARCHAR},
+      </if>
+      <if test="hfloor != null">
+        #{hfloor,jdbcType=VARCHAR},
+      </if>
+      <if test="hsize != null">
+        #{hsize,jdbcType=DOUBLE},
+      </if>
+      <if test="publicsize != null">
+        #{publicsize,jdbcType=DOUBLE},
+      </if>
+      <if test="hetong != null">
+        #{hetong,jdbcType=VARCHAR},
+      </if>
+      <if test="zhengming != null">
+        #{zhengming,jdbcType=VARCHAR},
+      </if>
+      <if test="bugtime != null">
+        #{bugtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.family.manage.entity.HousesExample" resultType="java.lang.Long">
+    select count(*) from houses
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update houses
+    <set>
+      <if test="record.hid != null">
+        hid = #{record.hid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        `uid` = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.htype != null">
+        htype = #{record.htype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xiaoqu != null">
+        xiaoqu = #{record.xiaoqu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hlou != null">
+        hlou = #{record.hlou,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfloor != null">
+        hfloor = #{record.hfloor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hsize != null">
+        hsize = #{record.hsize,jdbcType=DOUBLE},
+      </if>
+      <if test="record.publicsize != null">
+        publicsize = #{record.publicsize,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hetong != null">
+        hetong = #{record.hetong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhengming != null">
+        zhengming = #{record.zhengming,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bugtime != null">
+        bugtime = #{record.bugtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update houses
+    set hid = #{record.hid,jdbcType=INTEGER},
+      `uid` = #{record.uid,jdbcType=INTEGER},
+      htype = #{record.htype,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      xiaoqu = #{record.xiaoqu,jdbcType=VARCHAR},
+      hlou = #{record.hlou,jdbcType=VARCHAR},
+      hfloor = #{record.hfloor,jdbcType=VARCHAR},
+      hsize = #{record.hsize,jdbcType=DOUBLE},
+      publicsize = #{record.publicsize,jdbcType=DOUBLE},
+      hetong = #{record.hetong,jdbcType=VARCHAR},
+      zhengming = #{record.zhengming,jdbcType=VARCHAR},
+      bugtime = #{record.bugtime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.family.manage.entity.Houses">
+    update houses
+    <set>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="htype != null">
+        htype = #{htype,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoqu != null">
+        xiaoqu = #{xiaoqu,jdbcType=VARCHAR},
+      </if>
+      <if test="hlou != null">
+        hlou = #{hlou,jdbcType=VARCHAR},
+      </if>
+      <if test="hfloor != null">
+        hfloor = #{hfloor,jdbcType=VARCHAR},
+      </if>
+      <if test="hsize != null">
+        hsize = #{hsize,jdbcType=DOUBLE},
+      </if>
+      <if test="publicsize != null">
+        publicsize = #{publicsize,jdbcType=DOUBLE},
+      </if>
+      <if test="hetong != null">
+        hetong = #{hetong,jdbcType=VARCHAR},
+      </if>
+      <if test="zhengming != null">
+        zhengming = #{zhengming,jdbcType=VARCHAR},
+      </if>
+      <if test="bugtime != null">
+        bugtime = #{bugtime,jdbcType=DATE},
+      </if>
+    </set>
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.family.manage.entity.Houses">
+    update houses
+    set `uid` = #{uid,jdbcType=INTEGER},
+      htype = #{htype,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      xiaoqu = #{xiaoqu,jdbcType=VARCHAR},
+      hlou = #{hlou,jdbcType=VARCHAR},
+      hfloor = #{hfloor,jdbcType=VARCHAR},
+      hsize = #{hsize,jdbcType=DOUBLE},
+      publicsize = #{publicsize,jdbcType=DOUBLE},
+      hetong = #{hetong,jdbcType=VARCHAR},
+      zhengming = #{zhengming,jdbcType=VARCHAR},
+      bugtime = #{bugtime,jdbcType=DATE}
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+</mapper>

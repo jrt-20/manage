@@ -1,0 +1,101 @@
+{
+  "clearInfo": {
+    "clearUrl": "/layui/api/clear.json"
+  },
+  "homeInfo": {
+    "title": "首页",
+    "icon": "fa fa-home",
+    "href": "/page/welcome1"
+  },
+  "logoInfo": {
+    "title": "家庭财务管理",
+    "image": "/layui/images/logo.png",
+    "href": ""
+  },
+  "menuInfo": {
+    "currency": {
+      "title": "常规管理",
+      "icon": "fa fa-address-book",
+      "child": [
+        {
+          "title": "主页模板",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "主页一",
+              "href": "/page/welcome1",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "主页二",
+              "href": "/page/welcome2",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "主页三",
+              "href": "/page/welcome3",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "菜单管理",
+          "href": "/page/menu",
+          "icon": "fa fa-window-maximize",
+          "target": "_self"
+        },
+        {
+          "title": "表格示例",
+          "href": "/page/table",
+          "icon": "fa fa-file-text",
+          "target": "_self"
+        },
+        {
+          "title": "家庭成员",
+          "href": "",
+          "icon": "fa fa-calendar",
+          "target": "_self",
+          "child": [
+            {
+              "title": "普通表单",
+              "href": "/page/form",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            },
+            {
+              "title": "分步表单",
+              "href": "/page/formStep",
+              "icon": "fa fa-navicon",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "登录模板",
+          "href": "",
+          "icon": "fa fa-flag-o",
+          "target": "_self",
+          "child": [
+            {
+              "title": "登录-1",
+              "href": "/page/login1",
+              "icon": "fa fa-stumbleupon-circle",
+              "target": "_blank"
+            },
+            {
+              "title": "登录-2",
+              "href": "/page/login2",
+              "icon": "fa fa-viacoin",
+              "target": "_blank"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

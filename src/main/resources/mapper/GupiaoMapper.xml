@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.manage.mapper.GupiaoMapper">
+  <resultMap id="BaseResultMap" type="com.family.manage.entity.Gupiao">
+    <id column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="gtype" jdbcType="VARCHAR" property="gtype" />
+    <result column="gvalue" jdbcType="DOUBLE" property="gvalue" />
+    <result column="gup" jdbcType="DOUBLE" property="gup" />
+    <result column="gupyear" jdbcType="DOUBLE" property="gupyear" />
+    <result column="pvalue" jdbcType="DOUBLE" property="pvalue" />
+    <result column="risk" jdbcType="VARCHAR" property="risk" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    gid, `uid`, gtype, gvalue, gup, gupyear, pvalue, risk
+  </sql>
+  <select id="selectByExample" parameterType="com.family.manage.entity.GupiaoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gupiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByUid" parameterType="integer" resultType="com.family.manage.entity.Gupiao">
+    select *
+    from gupiao where uid = #{uid};
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gupiao
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gupiao
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByUid" parameterType="integer">
+    delete  from gupiao where uid = #{uid};
+  </delete>
+  <delete id="deleteByExample" parameterType="com.family.manage.entity.GupiaoExample">
+    delete from gupiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.family.manage.entity.Gupiao">
+    insert into gupiao (gid, `uid`, gtype, 
+      gvalue, gup, gupyear, 
+      pvalue, risk)
+    values (#{gid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{gtype,jdbcType=VARCHAR}, 
+      #{gvalue,jdbcType=DOUBLE}, #{gup,jdbcType=DOUBLE}, #{gupyear,jdbcType=DOUBLE}, 
+      #{pvalue,jdbcType=DOUBLE}, #{risk,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.family.manage.entity.Gupiao">
+    insert into gupiao
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gid != null">
+        gid,
+      </if>
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="gtype != null">
+        gtype,
+      </if>
+      <if test="gvalue != null">
+        gvalue,
+      </if>
+      <if test="gup != null">
+        gup,
+      </if>
+      <if test="gupyear != null">
+        gupyear,
+      </if>
+      <if test="pvalue != null">
+        pvalue,
+      </if>
+      <if test="risk != null">
+        risk,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gid != null">
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="gtype != null">
+        #{gtype,jdbcType=VARCHAR},
+      </if>
+      <if test="gvalue != null">
+        #{gvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="gup != null">
+        #{gup,jdbcType=DOUBLE},
+      </if>
+      <if test="gupyear != null">
+        #{gupyear,jdbcType=DOUBLE},
+      </if>
+      <if test="pvalue != null">
+        #{pvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="risk != null">
+        #{risk,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.family.manage.entity.GupiaoExample" resultType="java.lang.Long">
+    select count(*) from gupiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gupiao
+    <set>
+      <if test="record.gid != null">
+        gid = #{record.gid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        `uid` = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.gtype != null">
+        gtype = #{record.gtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gvalue != null">
+        gvalue = #{record.gvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.gup != null">
+        gup = #{record.gup,jdbcType=DOUBLE},
+      </if>
+      <if test="record.gupyear != null">
+        gupyear = #{record.gupyear,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pvalue != null">
+        pvalue = #{record.pvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.risk != null">
+        risk = #{record.risk,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gupiao
+    set gid = #{record.gid,jdbcType=INTEGER},
+      `uid` = #{record.uid,jdbcType=INTEGER},
+      gtype = #{record.gtype,jdbcType=VARCHAR},
+      gvalue = #{record.gvalue,jdbcType=DOUBLE},
+      gup = #{record.gup,jdbcType=DOUBLE},
+      gupyear = #{record.gupyear,jdbcType=DOUBLE},
+      pvalue = #{record.pvalue,jdbcType=DOUBLE},
+      risk = #{record.risk,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.family.manage.entity.Gupiao">
+    update gupiao
+    <set>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="gtype != null">
+        gtype = #{gtype,jdbcType=VARCHAR},
+      </if>
+      <if test="gvalue != null">
+        gvalue = #{gvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="gup != null">
+        gup = #{gup,jdbcType=DOUBLE},
+      </if>
+      <if test="gupyear != null">
+        gupyear = #{gupyear,jdbcType=DOUBLE},
+      </if>
+      <if test="pvalue != null">
+        pvalue = #{pvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="risk != null">
+        risk = #{risk,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.family.manage.entity.Gupiao">
+    update gupiao
+    set `uid` = #{uid,jdbcType=INTEGER},
+      gtype = #{gtype,jdbcType=VARCHAR},
+      gvalue = #{gvalue,jdbcType=DOUBLE},
+      gup = #{gup,jdbcType=DOUBLE},
+      gupyear = #{gupyear,jdbcType=DOUBLE},
+      pvalue = #{pvalue,jdbcType=DOUBLE},
+      risk = #{risk,jdbcType=VARCHAR}
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+</mapper>
