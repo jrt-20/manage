@@ -15,6 +15,8 @@
     <result column="hetong" jdbcType="VARCHAR" property="hetong" />
     <result column="zhengming" jdbcType="VARCHAR" property="zhengming" />
     <result column="bugtime" jdbcType="DATE" property="bugtime" />
+    <result column="values" jdbcType="DOUBLE" property="value"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -112,16 +114,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.family.manage.entity.Houses">
-    insert into houses (hid, `uid`, htype, 
+    insert into houses (hid,uid, htype,
       city, area, xiaoqu, 
       hlou, hfloor, hsize, 
-      publicsize, hetong, zhengming, 
-      bugtime)
+      publicsize, hetong, zhengming, bugtime,value,name)
     values (#{hid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{htype,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{xiaoqu,jdbcType=VARCHAR}, 
       #{hlou,jdbcType=VARCHAR}, #{hfloor,jdbcType=VARCHAR}, #{hsize,jdbcType=DOUBLE}, 
       #{publicsize,jdbcType=DOUBLE}, #{hetong,jdbcType=VARCHAR}, #{zhengming,jdbcType=VARCHAR}, 
-      #{bugtime,jdbcType=DATE})
+      #{bugtime,jdbcType=DATE},#{value,jdbcType=DOUBLE},#{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.family.manage.entity.Houses">
     insert into houses

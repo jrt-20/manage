@@ -45,12 +45,14 @@ public class bankAddController {
                 admin.setJob(u.getJob());
                 admin.setMsg(u.getMsg());
                 admin.setUidcard(u.getUidcard());
+                admin.setName(u.getName());
             }
         }else{
             admin.setId(1);//默认为1
         }
 
         bank.setUid(admin.getId());
+        bank.setName(admin.getName());
         Date currentTime = new Date(System.currentTimeMillis());
         java.sql.Date date = new java.sql.Date(currentTime.getTime());
         bank.setCreatetime(date);

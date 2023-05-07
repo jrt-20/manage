@@ -7,6 +7,7 @@ import com.family.manage.entity.User;
 import com.family.manage.service.User.HouseService;
 import com.family.manage.service.User.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,15 +47,18 @@ public class houseAddController {
                 admin.setJob(u.getJob());
                 admin.setMsg(u.getMsg());
                 admin.setUidcard(u.getUidcard());
+                admin.setName(u.getName());
             }
         }else{
             admin.setId(1);//默认为1
         }
 
         houses.setUid(admin.getId());
-        Date date = new Date(System.currentTimeMillis());
-        java.sql.Date date1 = new java.sql.Date(date.getTime());
-        houses.setBugtime(date1);
+        houses.setName(admin.getName());
+        System.out.println("houses : buy time"+houses.getBugtime());
+//        Date date = new Date(System.currentTimeMillis());
+//        java.sql.Date date1 = new java.sql.Date(date.getTime());
+//        houses.setBugtime(date1);
         houses.setHetong("/layui/images/img.png");
         houses.setZhengming("/layui/images/img.png");
         houseService.insert(houses);

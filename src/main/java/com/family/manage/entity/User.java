@@ -19,6 +19,36 @@ public class User {
 
     private String msg;
 
+    private int age;
+
+    private String name;
+
+    private String email;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -53,6 +83,24 @@ public class User {
 
     public Integer getGender() {
         return gender;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", role=" + role +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", gender=" + gender +
+                ", uidcard='" + uidcard + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", job='" + job + '\'' +
+                ", msg='" + msg + '\'' +
+                ", age=" + age +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     public void setGender(Integer gender) {
@@ -91,22 +139,4 @@ public class User {
         this.msg = msg;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", role=").append(role);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", gender=").append(gender);
-        sb.append(", uidcard=").append(uidcard);
-        sb.append(", mobile=").append(mobile);
-        sb.append(", job=").append(job);
-        sb.append(", msg=").append(msg);
-        sb.append("]");
-        return sb.toString();
-    }
 }

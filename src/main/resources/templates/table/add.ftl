@@ -2,19 +2,18 @@
 
     <div class="layui-form layuimini-form">
         <div class="layui-form-item">
+            <label class="layui-form-label required">姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" lay-verify="required" lay-reqtext="姓名不能为空" placeholder="请输入姓名" value="" class="layui-input">
+                <tip>填写用户姓名</tip>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label required">用户名</label>
             <div class="layui-input-block">
                 <input type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名" value="" class="layui-input">
-                <tip>填写自己管理账号的名称。</tip>
             </div>
         </div>
-<#--        <div class="layui-form-item">-->
-<#--            <label class="layui-form-label required">性别</label>-->
-<#--            <div class="layui-input-block">-->
-<#--                <input type="radio" name="gender" value="男" title="男" checked="">-->
-<#--                <input type="radio" name="gender" value="女" title="女">-->
-<#--            </div>-->
-<#--        </div>-->
         <div class="layui-form-item">
             <label class="layui-form-label required">密码</label>
             <div class="layui-input-block">
@@ -25,6 +24,28 @@
             <label class="layui-form-label required">手机</label>
             <div class="layui-input-block">
                 <input type="number" name="mobile" lay-verify="required" lay-reqtext="手机不能为空" placeholder="请输入手机" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">年龄</label>
+            <div class="layui-input-block">
+                <input type="number" name="age" lay-verify="required" lay-reqtext="年龄不能为空" placeholder="请输入年龄" value="" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">性别</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="gender" title="男" value="1" checked>
+                <input type="checkbox" name="gender" title="女" value="0">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">邮箱</label>
+            <div class="layui-input-block">
+                <input type="text" name="email" lay-verify="required" lay-reqtext="邮箱不能为空" placeholder="请输入邮箱" value="" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -68,23 +89,37 @@
         // 当前弹出层，防止ID被覆盖
         var parentIndex = layer.index;
 
+        function isValidIdCard(idCard) {
+            // 18位身份证号正则表达式
+            var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if (reg.test(idCard) === false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var index = layer.alert(JSON.stringify(data.field), {
                 title: '最终的提交信息'
             }, function () {
-                $.ajax({
-                    url:"/table/insert",//所要提交数据的服务器地址
-                    data:data.field,
-                    type:"POST",
-                    dataType:"json",
-                    contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-                    async:false,
-                    cache:false,
-                    success:function (json) {
-                        console.log(json.url);
-                    }, //submit提交事件返回true则表单提交,false则阻止表单提交
-                });
+                if(isValidIdCard(data.field.uidcard)) {
+                    $.ajax({
+                        url: "/table/insert",//所要提交数据的服务器地址
+                        data: data.field,
+                        type: "POST",
+                        dataType: "json",
+                        contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+                        async: false,
+                        cache: false,
+                        success: function (json) {
+                            console.log(json.url);
+                        }, //submit提交事件返回true则表单提交,false则阻止表单提交
+                    });
+                }else{
+                    layer.msg("身份证号不合理");
+                }
 
                 // 关闭弹出层
                 layer.close(index);

@@ -28,15 +28,19 @@
                 icon: 'layui-icon-tips'
             }],
             cols: [[
-                {field: 'hid', width: 85, title: '房产id', sort: true},
+                // {field: 'hid', width: 85, title: '房产id', sort: true},
+                {field: 'name', width: 85, title: '户主', sort: true},
                 {field: 'htype', width: 120, title: '房屋类型'},
                 {field: 'city', width: 90, title: '城市'},
                 {field: 'area', title: '区域', width: 110},
                 {field: 'xiaoqu', title: '小区', width: 120},
                 {field: 'hlou', title: '楼栋', width: 110},
                 {field: 'hfloor', title: '房间号', width:100},
-                {field: 'hsize', title: '房产面积', width:110,height:50},
-                {field: 'publicsize', title: '公共面积', width:110,height: 50},
+                {field: 'hsize', title: '房产面积', width:90,height:50},
+                {field: 'publicsize', title: '公共面积', width:90,height: 50},
+                {field: 'value', title: '房产价值', width:110,height: 50,templet: function (d){
+                    return d.value + " 万元";
+                    }},
                 {field: 'bugtime',title:'购房时间',width:170,templet:"<div>{{layui.util.toDateString(d.bugtime)}}</div>"},
                 {field: 'hetong', title: '购房合同', width:150,templet: '<div><img src={{d.hetong}} lay-event="imgPrew" style="max-height: 30px;' +
                         'max-width:80px"></div>'},

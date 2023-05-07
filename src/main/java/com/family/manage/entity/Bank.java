@@ -7,6 +7,8 @@ public class Bank {
 
     private Integer uid;
 
+    private String name;
+
     private String bname;
 
     private String umobile;
@@ -16,6 +18,8 @@ public class Bank {
     private String btype;
 
     private Date createtime;
+
+    private String card;
 
     public Integer getBid() {
         return bid;
@@ -35,6 +39,36 @@ public class Bank {
 
     public String getBname() {
         return bname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCard() {
+        return card;
+    }
+
+    public void setCard(String card) {
+        this.card = card;
+    }
+
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "bid=" + bid +
+                ", uid=" + uid +
+                ", name='" + name + '\'' +
+                ", bname='" + bname + '\'' +
+                ", umobile='" + umobile + '\'' +
+                ", money=" + money +
+                ", btype='" + btype + '\'' +
+                ", createtime=" + createtime +
+                '}';
     }
 
     public void setBname(String bname) {
@@ -73,16 +107,4 @@ public class Bank {
         this.createtime = createtime;
     }
 
-    @Override
-    public String toString() {
-        return "Bank{" +
-                "bid=" + bid +
-                ", uid=" + uid +
-                ", bname='" + bname + '\'' +
-                ", umobile='" + umobile + '\'' +
-                ", money=" + money +
-                ", btype='" + btype + '\'' +
-                ", createtime=" + createtime +
-                '}';
-    }
 }

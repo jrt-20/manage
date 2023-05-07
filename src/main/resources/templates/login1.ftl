@@ -41,6 +41,10 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-username" for="username"></label>
+                    <input type="text" name="sname" lay-verify="required|account" placeholder="家庭名称" autocomplete="off" class="layui-input" value="ikun之家">
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-icon layui-icon-username" for="username"></label>
                     <input type="text" name="username" lay-verify="required|account" placeholder="用户名或者邮箱" autocomplete="off" class="layui-input" value="admin">
                 </div>
                 <div class="layui-form-item">
@@ -59,6 +63,9 @@
                 </div>
                 <div class="layui-form-item">
                     <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="login">登 入</button>
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="register">注 册</button>
                 </div>
             </form>
         </div>
@@ -103,7 +110,7 @@
                 return false;
             }
             $.ajax({
-                url:"/login2/"+data.username+"/"+data.password,//所要提交数据的服务器地址
+                url:"/login2/"+data.username+"/"+data.password+"/"+data.sname,//所要提交数据的服务器地址
                 type:"POST",
                 dataType:"json",
                 contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -111,11 +118,16 @@
                 cache:false,
                 success:function (json) {
                     console.log(json.url);
-                    if(json.flag==1){
+                    if(json.flag==2){
                         layer.msg('登录成功', function () {
                             window.location = '/index';
                         });
-                    }else{
+                    }else if(json.flag==1){
+                        layer.msg('不是该家庭成员', function () {
+                            window.location = '/page/login1';
+                        });
+                    }
+                    else{
                         layer.msg('用户不存在', function () {
                             window.location = '/page/login1';
                         });
@@ -124,6 +136,11 @@
             })
             return false;
         });
+
+        form.on('submit(register)',function (data){
+            window.location='/page/register';
+            return false;
+        })
     });
 </script>
 </body>

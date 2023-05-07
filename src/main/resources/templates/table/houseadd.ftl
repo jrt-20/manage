@@ -51,6 +51,21 @@
             </div>
         </div>
 
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">房产价值</label>
+            <div class="layui-input-block">
+                <input type="number" name="value" placeholder="请输入房产价值" value="" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">购房日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="bugtime" lay-verify='date' placeholder="yyyy-MM-dd" value="" class="layui-input">
+            </div>
+        </div>
+
+
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>

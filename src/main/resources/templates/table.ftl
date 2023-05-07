@@ -38,16 +38,19 @@
             cols: [[
                 {type: "checkbox", width: 50, fixed: "left"},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'username', width: 140, title: '用户名'},
-                {field: 'gender', width: 140, title: '性别', templet: function (d){
+                {field: 'name', width: 100, title: '姓名', sort: true},
+                {field: 'username', width: 100, title: '用户名'},
+                {field: 'gender', width: 80, title: '性别', templet: function (d){
                     if(d.gender == 1) return "男";
                     else {
                         return "女";
                     }
                     }},
-                {field: 'uidcard', width: 280, title: '身份证'},
-                {field: 'mobile', title: '手机号码', width: 220},
-                {field: 'job', width: 140, title: '职业', sort: true},
+                {field: 'uidcard', width: 240, title: '身份证'},
+                {field: 'mobile', title: '手机号码', width: 160},
+                {field: 'job', width: 110, title: '职业', sort: true},
+                {field: 'age', width: 90, title: '年龄', sort: true},
+                {field: 'email', width: 180, title: '邮箱', sort: true},
                 {title: '操作', minWidth: 50, templet: '#currentTableBar', fixed: "right", align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],

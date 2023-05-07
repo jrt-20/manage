@@ -108,11 +108,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.family.manage.entity.Bank">
-    insert into bank (bid, `uid`, bname, 
-      umobile, money, btype,createtime
+    insert into bank (uid, bname,
+      umobile, money, btype,createtime,name,card
       )
-    values (#{bid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{bname,jdbcType=VARCHAR}, 
-      #{umobile,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, #{btype,jdbcType=VARCHAR},#{createtime}
+    values (#{uid,jdbcType=INTEGER}, #{bname,jdbcType=VARCHAR},
+      #{umobile,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, #{btype,jdbcType=VARCHAR},#{createtime},
+      #{name,jdbcType=VARCHAR},#{card,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.family.manage.entity.Bank">

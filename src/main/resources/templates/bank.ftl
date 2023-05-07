@@ -35,7 +35,9 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50, fixed: "left"},
-                {field: 'bid', width: 120, title: '卡号id', sort: true},
+                // {field: 'bid', width: 80, title: '卡号id', sort: true},
+                {field: 'name', width: 120, title: '开户人姓名', sort: true},
+                {field: 'card',width: 180,title: '银行卡号'},
                 {field: 'bname', width: 210, title: '开户银行名'},
                 {field: 'money', width: 170, title: '账户余额',templet:function (d){
                     return d.money+" 元";

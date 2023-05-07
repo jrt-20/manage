@@ -1,8 +1,10 @@
 package com.family.manage.controller.User;
 
 import com.alibaba.fastjson.JSONObject;
+import com.family.manage.entity.Family;
 import com.family.manage.entity.User;
 import com.family.manage.service.User.UserService;
+import com.family.manage.service.family.FamilyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,9 @@ public class LoginController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private FamilyService familyService;
 
     @RequestMapping("/page/login1")
     public ModelAndView login1(){
@@ -42,8 +47,8 @@ public class LoginController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/login2/{username}/{psw}")
-    public String Login(@PathVariable("username") String username, @PathVariable("psw")String password, HttpSession session, ModelAndView modelAndView){
+    @RequestMapping("/login2/{username}/{psw}/{sname}")
+    public String Login(@PathVariable("username") String username, @PathVariable("psw")String password, @PathVariable("sname")String sname, HttpSession session, ModelAndView modelAndView){
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -52,9 +57,30 @@ public class LoginController {
         session.setAttribute("user",user);
         JSONObject object = new JSONObject();
         modelAndView.addObject("user",user);
+
+        List<User> users = userService.selectAll(user.getUsername());
+        for (User u:
+                users) {
+            user.setId(u.getId());
+            user.setRole(u.getRole());
+            user.setGender(u.getGender());
+            user.setMobile(u.getMobile());
+            user.setJob(u.getJob());
+            user.setMsg(u.getMsg());
+            user.setUidcard(u.getUidcard());
+        }
+        if(users.size()==0||flag==0){
+            flag = 0;
+            object.put("flag",flag);
+            return object.toString();
+        }
+        Family family = familyService.selectByUid(user.getId());
+        if(family.getFname().equals(sname)){
+            flag = 2;
+        }
         if(flag==1){
             object.put("url","/index");
-        }else {
+        }else if(flag==0){
             object.put("url","/login");
         }
         object.put("flag",flag);

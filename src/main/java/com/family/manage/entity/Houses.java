@@ -1,5 +1,7 @@
 package com.family.manage.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Houses {
@@ -27,7 +29,12 @@ public class Houses {
 
     private String zhengming;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date bugtime;
+
+    private Double value;
+
+    private String name;
 
     public Integer getHid() {
         return hid;
@@ -133,26 +140,40 @@ public class Houses {
         this.bugtime = bugtime;
     }
 
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", hid=").append(hid);
-        sb.append(", uid=").append(uid);
-        sb.append(", htype=").append(htype);
-        sb.append(", city=").append(city);
-        sb.append(", area=").append(area);
-        sb.append(", xiaoqu=").append(xiaoqu);
-        sb.append(", hlou=").append(hlou);
-        sb.append(", hfloor=").append(hfloor);
-        sb.append(", hsize=").append(hsize);
-        sb.append(", publicsize=").append(publicsize);
-        sb.append(", hetong=").append(hetong);
-        sb.append(", zhengming=").append(zhengming);
-        sb.append(", bugtime=").append(bugtime);
-        sb.append("]");
-        return sb.toString();
+        return "Houses{" +
+                "hid=" + hid +
+                ", uid=" + uid +
+                ", htype='" + htype + '\'' +
+                ", city='" + city + '\'' +
+                ", area='" + area + '\'' +
+                ", xiaoqu='" + xiaoqu + '\'' +
+                ", hlou='" + hlou + '\'' +
+                ", hfloor='" + hfloor + '\'' +
+                ", hsize=" + hsize +
+                ", publicsize=" + publicsize +
+                ", hetong='" + hetong + '\'' +
+                ", zhengming='" + zhengming + '\'' +
+                ", bugtime=" + bugtime +
+                ", values=" + value +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

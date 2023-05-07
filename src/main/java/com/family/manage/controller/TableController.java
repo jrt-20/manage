@@ -148,7 +148,7 @@ public class TableController {
         }
         Family family = familyService.selectByUid(admin.getId());
         user.setRole(0);
-        user.setGender(1);
+        System.out.println("add user:"+user.toString());
         userService.insert(user);
 
         // 添加用户的补充信息

@@ -19,7 +19,7 @@
         body {background: #009688;}
         body:after {content:'';background-repeat:no-repeat;background-size:cover;-webkit-filter:blur(3px);-moz-filter:blur(3px);-o-filter:blur(3px);-ms-filter:blur(3px);filter:blur(3px);position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;}
         .layui-container {width: 100%;height: 100%;overflow: hidden}
-        .admin-login-background {width:360px;height:300px;position:absolute;left:50%;top:40%;margin-left:-180px;margin-top:-100px;}
+        .admin-login-background {width:360px;height:500px;position:absolute;left:50%;top:20%;margin-left:-180px;margin-top:-100px;}
         .logo-title {text-align:center;letter-spacing:2px;padding:14px 0;}
         .logo-title h1 {color:#009688;font-size:25px;font-weight:bold;}
         .login-form {background-color:#fff;border:1px solid #fff;border-radius:3px;padding:14px 20px;box-shadow:0 0 8px #eeeeee;}
@@ -45,6 +45,10 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-username" for="username"></label>
+                    <input type="text" name="name" lay-verify="required|account" placeholder="户主姓名" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-icon layui-icon-username" for="username"></label>
                     <input type="text" name="username" lay-verify="required|account" placeholder="用户名或者邮箱" autocomplete="off" class="layui-input" value="admin">
                 </div>
                 <div class="layui-form-item">
@@ -60,8 +64,16 @@
                     <input type="text" name="uidcard" lay-verify="required|password" placeholder="身份证号" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-icon layui-icon-username" for="username"></label>
+                    <input type="text" name="age" lay-verify="required|account" placeholder="年龄" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password" for="password"></label>
                     <input type="text" name="job" lay-verify="required|password" placeholder="职业" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-icon layui-icon-username" for="username"></label>
+                    <input type="text" name="email" lay-verify="required|account" placeholder="邮箱" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-item">
                     <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" title="记住密码">
@@ -92,6 +104,16 @@
             });
         });
 
+        function isValidIdCard(idCard) {
+            // 18位身份证号正则表达式
+            var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if (reg.test(idCard) === false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
         // 进行登录操作
         form.on('submit(login)', function (data) {
             data = data.field;
@@ -103,27 +125,31 @@
                 layer.msg('密码不能为空');
                 return false;
             }
-            $.ajax({
-                url:"/register/"+data.fname,//所要提交数据的服务器地址
-                type:"POST",
-                data:data,
-                dataType:"json",
-                contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-                async:false,
-                cache:false,
-                success:function (json) {
-                    console.log(json.url);
-                    if(json.flag==1){
-                        layer.msg('注册成功', function () {
-                            window.location = '/page/login1';
-                        });
-                    }else{
-                        layer.msg('注册失败', function () {
-                            window.location = '/page/register';
-                        });
-                    }
-                }, //submit提交事件返回true则表单提交,false则阻止表单提交
-            })
+            if(isValidIdCard(data.uidcard)) {
+                $.ajax({
+                    url: "/register/" + data.fname,//所要提交数据的服务器地址
+                    type: "POST",
+                    data: data,
+                    dataType: "json",
+                    contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+                    async: false,
+                    cache: false,
+                    success: function (json) {
+                        console.log(json.url);
+                        if (json.flag == 1) {
+                            layer.msg('注册成功', function () {
+                                window.location = '/page/login1';
+                            });
+                        } else {
+                            layer.msg('注册失败', function () {
+                                window.location = '/page/register';
+                            });
+                        }
+                    }, //submit提交事件返回true则表单提交,false则阻止表单提交
+                })
+            }else{
+                layer.msg('身份证不合理');
+            }
             return false;
         });
     });
